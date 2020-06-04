@@ -11,6 +11,7 @@ import {
 import './checkout.styles.scss';
 import CartItem from '../../components/cart-item/cart-item.component';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
+import CheckOutItem from '../../components/checkout-item/checkout-item.component';
 
 function CheckoutPage({ CartItems, total }) {
   return (
@@ -33,7 +34,7 @@ function CheckoutPage({ CartItems, total }) {
         </div>
       </div>
       {CartItems.map((cartItem) => (
-        <span>{cartItem.name}</span>
+        <CheckOutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <div className='toatl'>
         <span>TOTAL : $ {total}</span>
