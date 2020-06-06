@@ -12,6 +12,7 @@ import './checkout.styles.scss';
 import CartItem from '../../components/cart-item/cart-item.component';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 import CheckOutItem from '../../components/checkout-item/checkout-item.component';
+import StripeButton from '../../components/stripe-button/stripe-button.component';
 
 function CheckoutPage({ CartItems, total }) {
   return (
@@ -39,6 +40,12 @@ function CheckoutPage({ CartItems, total }) {
       <div className='toatl'>
         <span>TOTAL : $ {total}</span>
       </div>
+      <div className='test-warning'>
+        *Please use the following test credit card for payments*
+        <br />
+        4242 4242 4242 4242 - Exp : Any date in the future - CVV : 123
+      </div>
+      <StripeButton price={total} />
     </div>
   );
 }

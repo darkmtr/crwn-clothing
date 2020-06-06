@@ -8,18 +8,23 @@ import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header-component';
 import { setCurrentUser } from './redux/user/user.actions';
 import SignInAndSignUp from './pages/sign-in-and-sing-up/sign-in-and-sing-up.component';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import {
+  auth,
+  createUserProfileDocument,
+  addCollectionAndDocuments,
+} from './firebase/firebase.utils';
 
 import './App.css';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import CheckoutPage from './pages/checkout/checkout.component';
 import CollectionPage from './pages/collection/collection.component';
+import { selectCollectionsForPreview } from './redux/shop/shop.selector';
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser, collectionsArray } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
@@ -48,8 +53,8 @@ class App extends React.Component {
         <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route exact path='/shop' component={ShopPage} />
-          <Route exact path='/shop/:categoryId' component={CollectionPage} />
+          <Route path='/shop' component={ShopPage} />
+          {/* <Route exact path='/shop/:categoryId' component={CollectionPage} /> */}
           <Route exact path='/checkout' component={CheckoutPage} />
           <Route
             exact
@@ -66,6 +71,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
   currentUser: selectCurrentUser(state),
+  collectionsArray: selectCollectionsForPreview(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
