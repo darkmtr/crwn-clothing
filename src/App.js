@@ -8,11 +8,7 @@ import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header-component';
 import { setCurrentUser } from './redux/user/user.actions';
 import SignInAndSignUp from './pages/sign-in-and-sing-up/sign-in-and-sing-up.component';
-import {
-  auth,
-  createUserProfileDocument,
-  addCollectionAndDocuments,
-} from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import './App.css';
 import { selectCurrentUser } from './redux/user/user.selectors';
